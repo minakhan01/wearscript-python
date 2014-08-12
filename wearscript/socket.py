@@ -1,3 +1,4 @@
+import traceback
 import gevent.monkey
 gevent.monkey.patch_all()
 from geventwebsocket.handler import WebSocketHandler
@@ -134,7 +135,8 @@ class WearScriptConnection(object):
                     except (SystemExit, WebSocketException):
                         raise
                     except:
-                        print('Uncaught exception in default callback ' + self.group_device)
+                        print('Uncaught exception in default callback in socket ' + self.group_device)
+                        traceback.print_exc(file=sys.stdout)
 
     @property
     def channels_external(self):
